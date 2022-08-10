@@ -21,11 +21,10 @@ public class UsuarioDAO {
 	public void salvar(Usuario usuario) {
 
 		try {
-			String sql = "insert into usuario (id, nome, email) values (?, ?, ?)";
+			String sql = "insert into usuario (nome, email) values (?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
-			insert.setLong(1, usuario.getId());
-			insert.setString(2, usuario.getNome());
-			insert.setString(3, usuario.getEmail());
+			insert.setString(1, usuario.getNome());
+			insert.setString(2, usuario.getEmail());
 			insert.execute();
 			connection.commit();
 
@@ -108,6 +107,24 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void delete(Long id) {
+
+		try {
+			String sql = "delete from usuario where id = " + id;
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.execute();
+
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 	}
 
 }

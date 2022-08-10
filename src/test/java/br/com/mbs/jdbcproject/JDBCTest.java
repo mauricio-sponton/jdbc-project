@@ -21,8 +21,7 @@ public class JDBCTest {
 		var usuarioDAO = new UsuarioDAO();
 		var usuario = new Usuario();
 
-		usuario.setId(2L);
-		usuario.setNome("Jordana");
+		usuario.setNome("Mauricio");
 		usuario.setEmail("mauricio@gmail.com");
 
 		usuarioDAO.salvar(usuario);
@@ -54,6 +53,12 @@ public class JDBCTest {
 		usuario.setNome("Alcione");
 		usuario.setEmail("teste@gmail.com");
 		usuarioDAO.atualizar(usuario);
+	}
+	
+	@Test
+	public void deletar() {
+		var usuarioDAO = new UsuarioDAO();
+		usuarioDAO.delete(4L);
 	}
 
 }
