@@ -7,6 +7,7 @@ import org.junit.Test;
 import br.com.mbs.jdbcproject.connection.SingleConnection;
 import br.com.mbs.jdbcproject.dao.TelefoneDAO;
 import br.com.mbs.jdbcproject.dao.UsuarioDAO;
+import br.com.mbs.jdbcproject.model.ProjecaoTelefone;
 import br.com.mbs.jdbcproject.model.Telefone;
 import br.com.mbs.jdbcproject.model.Usuario;
 
@@ -72,6 +73,37 @@ public class JDBCTest {
 		
 		var telefoneDAO = new TelefoneDAO();
 		telefoneDAO.salvar(telefone);
+	}
+	
+	@Test
+	public void listarTelefone() {
+		
+		var telefoneDAO = new TelefoneDAO();
+		List<Telefone> lista = telefoneDAO.listar();
+		
+		for(Telefone telefone : lista) {
+			System.out.println(telefone);
+			System.out.println("---------------------------------");
+		}
+	}
+	
+	@Test
+	public void buscarTelefonePorId() {
+		var telefoneDAO = new TelefoneDAO();
+		Telefone telefone = telefoneDAO.buscarPorId(2L);
+		System.out.println(telefone);
+	}
+	
+	@Test
+	public void listarProjecao() {
+		
+		var telefoneDAO = new TelefoneDAO();
+		List<ProjecaoTelefone> lista = telefoneDAO.listarProjecao(2L);
+		
+		for(ProjecaoTelefone projecao : lista) {
+			System.out.println(projecao);
+			System.out.println("---------------------------------");
+		}
 	}
 
 }
