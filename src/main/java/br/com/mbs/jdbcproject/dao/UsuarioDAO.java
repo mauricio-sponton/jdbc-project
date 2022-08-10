@@ -2,7 +2,10 @@ package br.com.mbs.jdbcproject.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.mbs.jdbcproject.connection.SingleConnection;
 import br.com.mbs.jdbcproject.model.Usuario;
@@ -35,6 +38,55 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public List<Usuario> listar() {
+
+		List<Usuario> lista = new ArrayList<>();
+
+		try {
+
+			String sql = "select * from usuario";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+
+			while (resultado.next()) {
+
+				Usuario usuario = new Usuario();
+				usuario.setId(resultado.getLong("id"));
+				usuario.setNome(resultado.getString("nome"));
+				usuario.setEmail(resultado.getString("email"));
+				lista.add(usuario);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
+	public Usuario buscarPorId(Long id) {
+
+		Usuario usuario = new Usuario();
+
+		try {
+
+			String sql = "select * from usuario where id = " + id;
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+
+			while (resultado.next()) {
+				usuario.setId(resultado.getLong("id"));
+				usuario.setNome(resultado.getString("nome"));
+				usuario.setEmail(resultado.getString("email"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return usuario;
 	}
 
 }
