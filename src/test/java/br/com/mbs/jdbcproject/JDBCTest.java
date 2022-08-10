@@ -46,5 +46,14 @@ public class JDBCTest {
 		Usuario usuario = usuarioDAO.buscarPorId(2L);
 		System.out.println(usuario);
 	}
+	
+	@Test
+	public void atualizar() {
+		var usuarioDAO = new UsuarioDAO();
+		Usuario usuario = usuarioDAO.buscarPorId(1L);
+		usuario.setNome("Alcione");
+		usuario.setEmail("teste@gmail.com");
+		usuarioDAO.atualizar(usuario);
+	}
 
 }

@@ -65,7 +65,7 @@ public class UsuarioDAO {
 
 		return lista;
 	}
-	
+
 	public Usuario buscarPorId(Long id) {
 
 		Usuario usuario = new Usuario();
@@ -87,6 +87,27 @@ public class UsuarioDAO {
 		}
 
 		return usuario;
+	}
+
+	public void atualizar(Usuario usuario) {
+
+		try {
+			String sql = "update usuario set nome = ?, email = ? where id = " + usuario.getId();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, usuario.getNome());
+			statement.setString(2, usuario.getEmail());
+			statement.execute();
+			connection.commit();
+
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+
 	}
 
 }
