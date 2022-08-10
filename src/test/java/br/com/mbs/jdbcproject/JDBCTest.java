@@ -61,7 +61,7 @@ public class JDBCTest {
 	@Test
 	public void deletarUsuario() {
 		var usuarioDAO = new UsuarioDAO();
-		usuarioDAO.delete(4L);
+		usuarioDAO.delete(1L);
 	}
 	
 	@Test
@@ -104,6 +104,13 @@ public class JDBCTest {
 			System.out.println(projecao);
 			System.out.println("---------------------------------");
 		}
+	}
+	
+	@Test
+	public void deletarTelefone() {
+		
+		var telefoneDAO = new TelefoneDAO();
+		telefoneDAO.delete(1L);
 	}
 
 }

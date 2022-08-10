@@ -117,44 +117,25 @@ public class TelefoneDAO {
 
 		return telefone;
 	}
+	
+	public void delete(Long id) {
 
-//	public void atualizar(Usuario usuario) {
-//
-//		try {
-//			String sql = "update usuario set nome = ?, email = ? where id = " + usuario.getId();
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.setString(1, usuario.getNome());
-//			statement.setString(2, usuario.getEmail());
-//			statement.execute();
-//			connection.commit();
-//
-//		} catch (SQLException e) {
-//			try {
-//				connection.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			e.printStackTrace();
-//		}
-//
-//	}
-//
-//	public void delete(Long id) {
-//
-//		try {
-//			String sql = "delete from usuario where id = " + id;
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.execute();
-//
-//			connection.commit();
-//		} catch (SQLException e) {
-//			try {
-//				connection.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			e.printStackTrace();
-//		}
-//	}
+		try {
+			String sql = "delete from telefone where id = " + id;
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.execute();
+
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
+
+	
 
 }

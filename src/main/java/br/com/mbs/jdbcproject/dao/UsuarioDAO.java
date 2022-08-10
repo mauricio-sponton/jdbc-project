@@ -109,21 +109,27 @@ public class UsuarioDAO {
 
 	}
 
-	public void delete(Long id) {
+	public void delete(Long usuarioId) {
 
 		try {
-			String sql = "delete from usuario where id = " + id;
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.execute();
+			String sqlFone = "delete from telefone where usuario_fk = " + usuarioId;
+			String sqlUsuario = "delete from usuario where id = " + usuarioId;
+			
+			PreparedStatement statement = connection.prepareStatement(sqlFone);
+			statement.executeUpdate();
+			connection.commit();
+			
+			statement = connection.prepareStatement(sqlUsuario);
+			statement.executeUpdate();
 
 			connection.commit();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			e.printStackTrace();
 		}
 	}
 
